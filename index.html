@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validação</title>
+</head>
+
+<body>
+    <label for="info1">Info 1: </label>
+    <input type="text" id="info1" placeholder="xxx.xxx_y_.">
+    <div id="validator1"></div><br>
+    <label for="info2">Info 2: </label>
+    <input type="text" id="info2" placeholder="N.x">
+    <div id="validator2"></div><br>
+    <button onclick="gerar()">Gerar</button>
+    <button onclick="apagar()">Apagar</button>
+    <hr>
+    <div id="infors">
+        <p id="resInfo1">Info 1: </p><br><br>
+        <p id="resInfo2">Info 2:</p>
+    </div>
+
+    <script>
+        var info1 = document.getElementById('info1');
+        var info2 = document.getElementById('info2');
+        var res1 = document.getElementById('resInfo1');
+        var res2 = document.getElementById('resInfo2');
+        var validator1 = document.getElementById('validator1');
+        var validator2 = document.getElementById('validator2');
+
+        info1.addEventListener('input', () => {
+            var regex = /^[0-9]{3}\.[0-9]{3}_[a-zA-Z]_\.$/;
+            if (regex.test(info1.value)) {
+                validator1.innerHTML = "Formato válido!";
+                validator1.style.color = "green";
+            } else {
+                validator1.innerHTML = "Formato inválido. Use xxx.xxx_y_.";
+                validator1.style.color = "red";
+            }
+        });
+
+        info2.addEventListener('input', () => {
+            var regexInfo2 = /^N\.[0-9]+$/;
+            if (regexInfo2.test(info2.value)) {
+                validator2.innerHTML = "Formato válido!";
+                validator2.style.color = "green";
+            } else {
+                validator2.innerHTML = "Formato inválido. Use N.x, onde x é um número.";
+                validator2.style.color = "red";
+            }
+        });
+
+        function gerar() {
+            if (/^[0-9]{3}\.[0-9]{3}_[a-zA-Z]_\.$/.test(info1.value)) {
+                res1.innerHTML = "Info 1: " + info1.value;
+            } else {
+                res1.innerHTML = "Info 1: Formato inválido!";
+            }
+
+            if (/^N\.[0-9]+$/.test(info2.value)) {
+                res2.innerHTML = "Info 2: " + info2.value;
+            } else {
+                res2.innerHTML = "Info 2: Formato inválido!";
+            }
+        }
+        function apagar() {
+            info1.value = '';
+            info2.value = '';
+            res1.innerHTML = "Info 1: ";
+            res2.innerHTML = "Info 2: ";
+        }
+    </script>
+
+</body>
+
+</html>
